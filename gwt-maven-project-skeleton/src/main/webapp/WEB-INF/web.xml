@@ -18,9 +18,15 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<servlet>
+		<servlet-name>api</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
 	<servlet-mapping>
-		<servlet-name>spring</servlet-name>
-		<url-pattern>/</url-pattern>
+		<servlet-name>api</servlet-name>
+		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
 
 	<resource-ref>

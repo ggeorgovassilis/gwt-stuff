@@ -1,12 +1,37 @@
 <!doctype html>
 <html>
+<head>
+<script type="text/javascript" src="static/com.github.georgovassilis.gmps.Client/com.github.georgovassilis.gmps.Client.nocache.js"></script>
+<style type="text/css">
+
+.page{
+	display:none;
+}
+
+.contact-list-visible #contact-list{
+	display:block;
+}
+
+.edit-contact-form-visible #edit-contact-form{
+	display:block;
+}
+
+</style>
+</head>
 <body>
 <div id="main">
-<div id="contact-list">
+<div id="contact-list" class="page">
+<h1>Contact list</h1>
+<div id="contacts-panel"></div>
+<button id="new-contact-button">New contact</button>
 </div>
-<div id="edit-contact-form">
+<div id="edit-contact-form" class="page">
+<h1>Edit contacts</h1>
+<div>
+<div><label for="name">Name</label><input id="name" type="text"/></div>
+<div><label for="phone">Phone</label><input id="phone" type="text"/></div>
 </div>
 </div>
-<script type="text/javascript" src="static/com.github.georgovassilis.gmps.Client/com.github.georgovassilis.gmps.Client.nocache.js"></script>
+</div>
 </body>
 </html>

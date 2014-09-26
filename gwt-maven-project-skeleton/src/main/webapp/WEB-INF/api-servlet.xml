@@ -13,21 +13,13 @@
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
-	<context:component-scan
-		base-package="com.desaville.server.web,com.desaville.server.web" />
-	<mvc:resources mapping="/static/**" location="/static/" />
-	<mvc:default-servlet-handler />
-
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basenames" value="classpath:gmps/messages" />
-		<property name="defaultEncoding" value="UTF-8" />
-	</bean>
-
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
+	<bean class="org.gwtwidgets.server.spring.GWTHandler">
+		<property name="mappings">
+			<map>
+				<entry key="/addressbook" value-ref="AddressBookService" />
+			</map>
+		</property>
+		<property name="scanParentApplicationContext" value="true"/>
 	</bean>
 
 </beans>

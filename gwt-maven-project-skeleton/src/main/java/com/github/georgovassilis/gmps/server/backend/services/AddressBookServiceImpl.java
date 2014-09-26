@@ -18,7 +18,7 @@ import com.github.georgovassilis.gmps.server.backend.daos.ContactDao;
 import com.github.georgovassilis.gmps.server.backend.domain.Address;
 import com.github.georgovassilis.gmps.server.backend.domain.Contact;
 
-@Service
+@Service("AddressBookService")
 @Transactional
 public class AddressBookServiceImpl implements AddressBookService {
 
@@ -54,8 +54,10 @@ public class AddressBookServiceImpl implements AddressBookService {
 	}
 
 	@Override
-	public ContactDto newContact() {
-		Contact c = contactDao.saveAndFlush(new Contact());
+	public ContactDto newContact(ContactCoverDto cover) {
+		Contact c = new Contact();
+		BeanUtils.copyProperties(cover, c);
+		c = contactDao.saveAndFlush(c);
 		ContactDto dto = new ContactDto();
 		dto.setCover(convert(c));
 		return dto;
@@ -90,9 +92,10 @@ public class AddressBookServiceImpl implements AddressBookService {
 	}
 
 	@Override
-	public AddressDto newAddressForContact(Long contactId) {
+	public AddressDto newAddressForContact(Long contactId, AddressDto addressDto) {
 		Contact contact = contactDao.findOne(contactId);
 		Address address = new Address();
+		BeanUtils.copyProperties(addressDto, address);
 		address.setContact(contact);
 		address = addressDao.saveAndFlush(address);
 		contact.getAddresses().add(address);

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.georgovassilis.gmps.common.api.AddressBookService;
 import com.github.georgovassilis.gmps.common.domain.AddressDto;
+import com.github.georgovassilis.gmps.common.domain.ContactCoverDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
 
 import static org.junit.Assert.*;
@@ -25,20 +26,27 @@ public class AddressBookServiceImplTest {
 
 	@Test
 	public void testCRUD() {
-		ContactDto contact = service.newContact();
-		contact.getCover().setName("Joe Doe");
+		ContactDto contact = new ContactDto();
+		contact.setCover(new ContactCoverDto());
+		contact.getCover().setName("Joe Doe I");
 		contact.getCover().setPhoneNumber("12345");
-		contact.setCover(service.updateContactDetails(contact.getCover()));
-		assertEquals("Joe Doe", contact.getCover().getName());
+		contact = service.newContact(contact.getCover());
+		assertEquals("Joe Doe I", contact.getCover().getName());
 		assertEquals("12345", contact.getCover().getPhoneNumber());
+		
+		contact.getCover().setName("Joe Doe");
+		contact.setCover(service.updateContactDetails(contact.getCover()));
 
-		AddressDto address1 = service.newAddressForContact(contact.getCover()
-				.getId());
+		AddressDto address1 = new AddressDto();
 		address1.setCity("Gotham City");
 		address1.setCountry("USA");
-		address1.setExtra("ABC");
+		address1.setExtra("ABCD");
 		address1.setPostalCode("123");
 		address1.setStreetAndNumber("Sunset bvd");
+		address1 = service.newAddressForContact(contact.getCover()
+				.getId(), address1);
+
+		address1.setExtra("ABC");
 		address1 = service.update(address1);
 
 		assertEquals("Gotham City", address1.getCity());
@@ -47,14 +55,14 @@ public class AddressBookServiceImplTest {
 		assertEquals("123", address1.getPostalCode());
 		assertEquals("Sunset bvd", address1.getStreetAndNumber());
 
-		AddressDto address2 = service.newAddressForContact(contact.getCover()
-				.getId());
+		AddressDto address2 = new AddressDto();
 		address2.setCity("Berlin");
 		address2.setCountry("Germany");
 		address2.setExtra("DEF");
 		address2.setPostalCode("456");
 		address2.setStreetAndNumber("Freiheitsplz");
-		address2 = service.update(address2);
+		address2 = service.newAddressForContact(contact.getCover()
+				.getId(), address2);
 
 		contact = service.getContact(contact.getCover().getId());
 		assertEquals("Joe Doe", contact.getCover().getName());
