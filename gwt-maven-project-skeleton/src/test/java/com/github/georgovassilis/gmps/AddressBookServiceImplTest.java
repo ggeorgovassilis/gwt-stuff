@@ -35,7 +35,7 @@ public class AddressBookServiceImplTest {
 		assertEquals("12345", contact.getCover().getPhoneNumber());
 		
 		contact.getCover().setName("Joe Doe");
-		contact.setCover(service.updateContactDetails(contact.getCover()));
+		contact = service.updateContactDetails(contact.getCover());
 
 		AddressDto address1 = new AddressDto();
 		address1.setCity("Gotham City");

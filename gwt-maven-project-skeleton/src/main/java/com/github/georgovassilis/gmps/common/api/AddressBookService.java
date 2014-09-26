@@ -13,7 +13,7 @@ public interface AddressBookService extends RemoteService{
 
 	List<ContactCoverDto> listContacts();
 	ContactDto newContact(ContactCoverDto contact);
-	ContactCoverDto updateContactDetails(ContactCoverDto contactDetails);
+	ContactDto updateContactDetails(ContactCoverDto contactDetails);
 	ContactDto getContact(Long id);
 	void deleteContact(Long id);
 	

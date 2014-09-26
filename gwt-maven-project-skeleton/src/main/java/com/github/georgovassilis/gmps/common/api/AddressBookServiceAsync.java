@@ -8,6 +8,7 @@ import com.github.georgovassilis.gmps.common.domain.ContactDto;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface AddressBookServiceAsync {
+	
 	void deleteAddress(Long addressId, AsyncCallback<Void> callback);
 
 	void deleteContact(Long id, AsyncCallback<Void> callback);
@@ -18,10 +19,10 @@ public interface AddressBookServiceAsync {
 
 	void newAddressForContact(Long contactId, AddressDto address, AsyncCallback<AddressDto> callback);
 
-	void newContact(ContactCoverDto contact, AsyncCallback<ContactCoverDto> callback);
+	void newContact(ContactCoverDto contact, AsyncCallback<ContactDto> callback);
 
 	void update(AddressDto address, AsyncCallback<AddressDto> callback);
 
 	void updateContactDetails(ContactCoverDto contactDetails,
-			AsyncCallback<ContactCoverDto> callback);
+			AsyncCallback<ContactDto> callback);
 }

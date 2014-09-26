@@ -64,11 +64,11 @@ public class AddressBookServiceImpl implements AddressBookService {
 	}
 
 	@Override
-	public ContactCoverDto updateContactDetails(ContactCoverDto contactDetails) {
+	public ContactDto updateContactDetails(ContactCoverDto contactDetails) {
 		Contact c = contactDao.findOne(contactDetails.getId());
 		BeanUtils.copyProperties(contactDetails, c);
 		c = contactDao.saveAndFlush(c);
-		return convert(c);
+		return getContact(c.getId());
 	}
 
 	@Override

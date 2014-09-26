@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.github.georgovassilis.gmps.client.Application;
 import com.github.georgovassilis.gmps.client.events.ContactListsUpdatedEvent;
-import com.github.georgovassilis.gmps.client.events.ContactListsUpdatedEventHandler;
 import com.github.georgovassilis.gmps.client.services.AddressBookService;
 import com.github.georgovassilis.gmps.client.ui.BaseViewPresenter;
 import com.github.georgovassilis.gmps.common.api.AddressBookServiceAsync;
@@ -14,7 +13,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class ContactListPresenter extends BaseViewPresenter<ContactListView> implements ContactListsUpdatedEventHandler{
+public class ContactListPresenter extends BaseViewPresenter<ContactListView> implements ContactListsUpdatedEvent.Handler{
 
 	private AddressBookService addressBookService;
 	

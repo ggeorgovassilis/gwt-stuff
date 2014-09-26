@@ -1,18 +1,25 @@
 package com.github.georgovassilis.gmps.client.events;
 
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
-public class AppStartedEvent extends GwtEvent<AppStartedEventHandler>{
+public class AppStartedEvent extends GwtEvent<AppStartedEvent.Handler>{
 
-	public static Type<AppStartedEventHandler> TYPE = new Type<AppStartedEventHandler>();
+	public interface Handler extends EventHandler{
+		
+		void onAppStarted(AppStartedEvent event);
+
+	}
+
+	public static Type<Handler> TYPE = new Type<Handler>();
 
 	@Override
-	public com.google.gwt.event.shared.GwtEvent.Type<AppStartedEventHandler> getAssociatedType() {
+	public com.google.gwt.event.shared.GwtEvent.Type<Handler> getAssociatedType() {
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(AppStartedEventHandler handler) {
+	protected void dispatch(Handler handler) {
 		handler.onAppStarted(this);
 	}
 

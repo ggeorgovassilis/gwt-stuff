@@ -3,11 +3,16 @@ package com.github.georgovassilis.gmps.client.events;
 import java.util.List;
 
 import com.github.georgovassilis.gmps.common.domain.ContactCoverDto;
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
-public class ContactListsUpdatedEvent extends GwtEvent<ContactListsUpdatedEventHandler>{
+public class ContactListsUpdatedEvent extends GwtEvent<ContactListsUpdatedEvent.Handler>{
 
-	public static Type<ContactListsUpdatedEventHandler> TYPE = new Type<ContactListsUpdatedEventHandler>();
+	public interface Handler extends EventHandler{
+		void onContactListsUpdated(ContactListsUpdatedEvent event);
+	}
+
+	public static Type<Handler> TYPE = new Type<Handler>();
 
 	public final List<ContactCoverDto> contacts;
 	
@@ -16,12 +21,12 @@ public class ContactListsUpdatedEvent extends GwtEvent<ContactListsUpdatedEventH
 	}
 	
 	@Override
-	public com.google.gwt.event.shared.GwtEvent.Type<ContactListsUpdatedEventHandler> getAssociatedType() {
+	public com.google.gwt.event.shared.GwtEvent.Type<Handler> getAssociatedType() {
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(ContactListsUpdatedEventHandler handler) {
+	protected void dispatch(Handler handler) {
 		handler.onContactListsUpdated(this);
 	}
 
