@@ -8,7 +8,7 @@ public class ContactUpdatedEvent extends GwtEvent<ContactUpdatedEvent.Handler>{
 
 	public interface Handler extends EventHandler{
 		
-		void onAppStarted(ContactUpdatedEvent event);
+		void contactUpdated(ContactDto contact);
 
 	}
 
@@ -27,7 +27,7 @@ public class ContactUpdatedEvent extends GwtEvent<ContactUpdatedEvent.Handler>{
 
 	@Override
 	protected void dispatch(ContactUpdatedEvent.Handler handler) {
-		handler.onAppStarted(this);
+		handler.contactUpdated(contact);
 	}
 
 }

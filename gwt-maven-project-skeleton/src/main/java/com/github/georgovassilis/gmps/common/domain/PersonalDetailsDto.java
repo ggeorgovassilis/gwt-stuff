@@ -2,7 +2,7 @@ package com.github.georgovassilis.gmps.common.domain;
 
 import java.io.Serializable;
 
-public class ContactCoverDto implements Serializable{
+public class PersonalDetailsDto implements Serializable{
 
 	private Long id;
 	private String name;

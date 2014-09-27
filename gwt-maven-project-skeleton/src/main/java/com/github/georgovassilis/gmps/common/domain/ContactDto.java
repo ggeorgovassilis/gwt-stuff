@@ -6,15 +6,15 @@ import java.util.List;
 
 public class ContactDto implements Serializable{
 	
-	private ContactCoverDto cover;
+	private PersonalDetailsDto personalDetails;
 	private List<AddressDto> addresses = new ArrayList<AddressDto>();
 
-	public ContactCoverDto getCover() {
-		return cover;
+	public PersonalDetailsDto getPersonalDetails() {
+		return personalDetails;
 	}
 
-	public void setCover(ContactCoverDto cover) {
-		this.cover = cover;
+	public void setPersonalDetails(PersonalDetailsDto personalDetails) {
+		this.personalDetails = personalDetails;
 	}
 
 	public List<AddressDto> getAddresses() {

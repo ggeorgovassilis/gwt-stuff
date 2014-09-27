@@ -3,7 +3,7 @@ package com.github.georgovassilis.gmps.common.api;
 import java.util.List;
 
 import com.github.georgovassilis.gmps.common.domain.AddressDto;
-import com.github.georgovassilis.gmps.common.domain.ContactCoverDto;
+import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -11,9 +11,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("../../api/addressbook")
 public interface AddressBookService extends RemoteService{
 
-	List<ContactCoverDto> listContacts();
-	ContactDto newContact(ContactCoverDto contact);
-	ContactDto updateContactDetails(ContactCoverDto contactDetails);
+	List<PersonalDetailsDto> listContacts();
+	ContactDto newContact(PersonalDetailsDto contact);
+	ContactDto updateContactDetails(PersonalDetailsDto contactDetails);
 	ContactDto getContact(Long id);
 	void deleteContact(Long id);
 	

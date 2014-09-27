@@ -7,11 +7,7 @@ public class AddressDto implements Serializable{
 	private Long id;
 	private Long version;
 	private String streetAndNumber;
-	private String extra;
-	private String postalCode;
 	private String city;
-	private String country;
-
 
 	public Long getVersion() {
 		return version;
@@ -37,22 +33,6 @@ public class AddressDto implements Serializable{
 		this.streetAndNumber = streetAndNumber;
 	}
 
-	public String getExtra() {
-		return extra;
-	}
-
-	public void setExtra(String extra) {
-		this.extra = extra;
-	}
-
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
-
 	public String getCity() {
 		return city;
 	}
@@ -61,11 +41,4 @@ public class AddressDto implements Serializable{
 		this.city = city;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
 }

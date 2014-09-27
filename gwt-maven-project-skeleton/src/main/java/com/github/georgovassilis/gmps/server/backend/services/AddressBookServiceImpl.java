@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.georgovassilis.gmps.common.api.AddressBookService;
 import com.github.georgovassilis.gmps.common.domain.AddressDto;
-import com.github.georgovassilis.gmps.common.domain.ContactCoverDto;
+import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
 import com.github.georgovassilis.gmps.server.backend.daos.AddressDao;
 import com.github.georgovassilis.gmps.server.backend.daos.ContactDao;
@@ -28,12 +28,12 @@ public class AddressBookServiceImpl implements AddressBookService {
 	@Resource
 	private AddressDao addressDao;
 
-	private ContactCoverDto convert(Contact c){
+	private PersonalDetailsDto convert(Contact c){
 		if (c == null)
 			return null;
-		ContactCoverDto cover = new ContactCoverDto();
-		BeanUtils.copyProperties(c,  cover);
-		return cover;
+		PersonalDetailsDto personalDetails = new PersonalDetailsDto();
+		BeanUtils.copyProperties(c,  personalDetails);
+		return personalDetails;
 	}
 	
 	private AddressDto convert(Address a){
@@ -45,26 +45,26 @@ public class AddressBookServiceImpl implements AddressBookService {
 	}
 	
 	@Override
-	public List<ContactCoverDto> listContacts() {
+	public List<PersonalDetailsDto> listContacts() {
 		List<Contact> contacts = contactDao.findAll();
-		List<ContactCoverDto> covers = new ArrayList<ContactCoverDto>();
+		List<PersonalDetailsDto> personalDetails = new ArrayList<PersonalDetailsDto>();
 		for (Contact c:contacts)
-			covers.add(convert(c));
-		return covers;
+			personalDetails.add(convert(c));
+		return personalDetails;
 	}
 
 	@Override
-	public ContactDto newContact(ContactCoverDto cover) {
+	public ContactDto newContact(PersonalDetailsDto personalDetails) {
 		Contact c = new Contact();
-		BeanUtils.copyProperties(cover, c);
+		BeanUtils.copyProperties(personalDetails, c);
 		c = contactDao.saveAndFlush(c);
 		ContactDto dto = new ContactDto();
-		dto.setCover(convert(c));
+		dto.setPersonalDetails(convert(c));
 		return dto;
 	}
 
 	@Override
-	public ContactDto updateContactDetails(ContactCoverDto contactDetails) {
+	public ContactDto updateContactDetails(PersonalDetailsDto contactDetails) {
 		Contact c = contactDao.findOne(contactDetails.getId());
 		BeanUtils.copyProperties(contactDetails, c);
 		c = contactDao.saveAndFlush(c);
@@ -77,8 +77,8 @@ public class AddressBookServiceImpl implements AddressBookService {
 		if (c == null)
 			return null;
 		ContactDto dto = new ContactDto();
-		ContactCoverDto cover = convert(c);
-		dto.setCover(cover);
+		PersonalDetailsDto personalDetails = convert(c);
+		dto.setPersonalDetails(personalDetails);
 		for (Address address:c.getAddresses()){
 			AddressDto adto = convert(address);
 			dto.getAddresses().add(adto);

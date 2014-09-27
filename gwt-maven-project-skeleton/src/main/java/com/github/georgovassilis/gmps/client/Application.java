@@ -28,7 +28,8 @@ public class Application implements EntryPoint{
 		MainViewImpl mainView = new MainViewImpl();
 		MainViewPresenter mainPresenter = new MainViewPresenter(bus, mainView);
 		ContactListPresenter contactListPresenter = new ContactListPresenter(bus, mainView.getContactsListView(), addressBookService);
-		EditContactPresenter editContactPresenter = new EditContactPresenter(bus, mainView.getEditContactView(), addressBookService);
+		EditContactPresenter editContactPresenter = new EditContactPresenter(bus, mainView.getEditContactView(), addressBookService, userCase);
+		
 		
 		userCase = new UseCase(bus, contactListPresenter, editContactPresenter);
 		

@@ -8,7 +8,7 @@ import com.github.georgovassilis.gmps.client.events.ContactListsUpdatedEvent;
 import com.github.georgovassilis.gmps.client.services.AddressBookService;
 import com.github.georgovassilis.gmps.client.ui.BaseViewPresenter;
 import com.github.georgovassilis.gmps.common.api.AddressBookServiceAsync;
-import com.github.georgovassilis.gmps.common.domain.ContactCoverDto;
+import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -38,7 +38,7 @@ public class ContactListPresenter extends BaseViewPresenter<ContactListView> imp
 	@Override
 	public void onContactListsUpdated(ContactListsUpdatedEvent event) {
 		view.clearContacts();
-		for (ContactCoverDto c:event.contacts){
+		for (PersonalDetailsDto c:event.contacts){
 			view.addContactEntry(c.getId(), c.getName(), c.getPhoneNumber());
 		}
 		if (event.contacts.isEmpty())

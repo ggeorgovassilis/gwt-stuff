@@ -2,24 +2,31 @@ package com.github.georgovassilis.gmps.client.ui.editcontact;
 
 import com.github.georgovassilis.gmps.client.services.AddressBookService;
 import com.github.georgovassilis.gmps.client.ui.BaseViewPresenter;
+import com.github.georgovassilis.gmps.client.ui.addresslist.AddressListViewPresenter;
 import com.github.georgovassilis.gmps.client.usecase.UseCase;
-import com.github.georgovassilis.gmps.common.domain.ContactCoverDto;
+import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
+import com.github.georgovassilis.gmps.client.events.ContactUpdatedEvent;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 
-public class EditContactPresenter extends BaseViewPresenter<EditContactView>{
+public class EditContactPresenter extends BaseViewPresenter<EditContactView> implements ContactUpdatedEvent.Handler, AddressListViewPresenter{
 	
 	enum Mode{editingNewContact,editingExistingContact};
 
 	private AddressBookService service;
 	private Mode mode = Mode.editingNewContact;
-	private Long contactId = 1l;
+	private Long contactId = null;
+	private UseCase useCase;
 	
 	
-	public EditContactPresenter(EventBus bus, EditContactView view, AddressBookService service) {
+	public EditContactPresenter(EventBus bus, EditContactView view, AddressBookService service, UseCase useCase) {
 		super(bus, view);
 		this.service = service;
+		view.setPresenter(this);
+		bus.addHandler(ContactUpdatedEvent.TYPE, this);
+		this.useCase = useCase;
 	}
 	
 	public void editNewContact(){
@@ -27,18 +34,21 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>{
 		view.setName("");
 		view.setPhone("");
 		view.setAsMainView();
-		//contactId = null;
+		contactId = null;
 		mode = Mode.editingNewContact;
 	}
 	
 	public void onSaveButtonClicked(){
-		ContactCoverDto dto = new ContactCoverDto();
+		PersonalDetailsDto dto = new PersonalDetailsDto();
 		dto.setId(contactId);
-		Window.alert("1");
 		dto.setName(view.getName());
-		Window.alert("2");
 		dto.setPhoneNumber(view.getPhone());
-		Window.alert("3");
+
+		if (dto.getName()==null||dto.getName().isEmpty()){
+			Window.alert("Name required");
+			return;
+		}
+		view.setSubmitButtonEnabled(false);
 		if (mode == Mode.editingNewContact){
 			service.saveNewContact(dto);
 		}
@@ -46,5 +56,25 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>{
 			service.saveExistingContact(dto);
 		}
 	}
+	
+	protected void show(ContactDto contact){
+		view.setName(contact.getPersonalDetails().getName());
+		view.setPhone(contact.getPersonalDetails().getPhoneNumber());
+		contactId = contact.getPersonalDetails().getId();
+	}
 
+	@Override
+	public void contactUpdated(ContactDto contact) {
+		view.setAsMainView();
+		show(contact);
+		view.switchToSaveExistingContactButton();
+		view.setSubmitButtonEnabled(true);
+		useCase.editContact(contact.getPersonalDetails().getId());
+	}
+
+	public void editContact(Long id){
+		view.setSubmitButtonEnabled(false);
+		service.retrieveContact(id);
+	}
+	
 }

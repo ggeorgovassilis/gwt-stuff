@@ -4,14 +4,15 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.HTMLPanel;
 
-public class ContactCoverWidget extends HTMLPanel{
+public class PersonalDetailsWidget extends HTMLPanel{
 
-	public ContactCoverWidget() {
+	public PersonalDetailsWidget() {
 		super("");
+		setStyleName("PersonalDetailsWidget");
 	}
 	
 	public void set(Long id, String name, String phone){
-		getElement().setInnerHTML("<label>"+SafeHtmlUtils.htmlEscape(name)+"</label> <i>"+SafeHtmlUtils.htmlEscape(phone)+"</i>");
+		getElement().setInnerHTML("<a href='#/contacts/"+id+"'>"+SafeHtmlUtils.htmlEscape(name)+"</a> <i>"+SafeHtmlUtils.htmlEscape(phone)+"</i>");
 	}
 
 }

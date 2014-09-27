@@ -3,7 +3,7 @@ package com.github.georgovassilis.gmps.client.ui.contactslist;
 import java.util.List;
 
 import com.github.georgovassilis.gmps.client.ui.BaseView;
-import com.github.georgovassilis.gmps.common.domain.ContactCoverDto;
+import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 
 public interface ContactListView extends BaseView{
 

@@ -25,10 +25,6 @@ public class Address implements Serializable {
 	@Column
 	private String streetAndNumber;
 	@Column
-	private String extra;
-	@Column
-	private String postalCode;
-	@Column
 	private String city;
 
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -68,22 +64,6 @@ public class Address implements Serializable {
 
 	public void setStreetAndNumber(String streetAndNumber) {
 		this.streetAndNumber = streetAndNumber;
-	}
-
-	public String getExtra() {
-		return extra;
-	}
-
-	public void setExtra(String extra) {
-		this.extra = extra;
-	}
-
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
 	}
 
 	public String getCity() {

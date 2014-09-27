@@ -1,0 +1,16 @@
+<div id="edit-contact-form" class="page">
+<h1>Edit contacts</h1>
+<a href="#/">Back to contact list</a>
+<div>
+<div><label for="name">Name</label><input id="name" type="text"/></div>
+<div><label for="phone">Phone</label><input id="phone" type="text"/></div>
+<div>
+<button id="save-contact-button">Save</button>
+</div>
+</div>
+<div>
+<h2>Addresses</h2>
+<div id="address-list">
+</div>
+</div>
+</div>

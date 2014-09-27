@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.github.georgovassilis.gmps.client.ui.BaseViewImpl;
 import com.github.georgovassilis.gmps.client.ui.main.MainViewImpl;
-import com.github.georgovassilis.gmps.common.domain.ContactCoverDto;
+import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -55,7 +55,7 @@ public class ContactListViewImpl extends BaseViewImpl implements ContactListView
 
 	@Override
 	public void addContactEntry(Long id, String name, String phoneNumber) {
-		ContactCoverWidget ccw = new ContactCoverWidget();
+		PersonalDetailsWidget ccw = new PersonalDetailsWidget();
 		ccw.set(id, name, phoneNumber);
 		contactsList.add(ccw);
 	}
