@@ -2,12 +2,12 @@ package com.github.georgovassilis.gmps.client.ui.editcontact;
 
 import java.util.List;
 
+import com.github.georgovassilis.gmps.client.Application;
 import com.github.georgovassilis.gmps.client.services.AddressBookServiceFacade;
 import com.github.georgovassilis.gmps.client.ui.BaseViewPresenter;
 import com.github.georgovassilis.gmps.client.ui.addresslist.AddressEntryWidget;
 import com.github.georgovassilis.gmps.client.ui.addresslist.AddressListView;
 import com.github.georgovassilis.gmps.client.ui.addresslist.AddressListViewPresenter;
-import com.github.georgovassilis.gmps.client.usecase.UseCase;
 import com.github.georgovassilis.gmps.common.domain.AddressDto;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
@@ -26,16 +26,14 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 	private AddressBookServiceFacade service;
 	private Mode mode = Mode.editingNewContact;
 	private Long contactId = null;
-	private UseCase useCase;
 
 	public EditContactPresenter(EventBus bus, EditContactView view,
-			AddressBookServiceFacade service, UseCase useCase) {
+			AddressBookServiceFacade service) {
 		super(bus, view);
 		this.service = service;
 		view.setPresenter(this);
 		bus.addHandler(ContactUpdatedEvent.TYPE, this);
 		bus.addHandler(AddressUpdatedEvent.TYPE, this);
-		this.useCase = useCase;
 	}
 
 	public void editNewContact() {
@@ -47,6 +45,7 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 		view.getAddressListView().showNoEntriesFound();
 		contactId = null;
 		mode = Mode.editingNewContact;
+		view.getAddressListView().setAddAddressButtonEnabled(false);
 	}
 
 	public void onSaveButtonClicked() {
@@ -81,8 +80,9 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 		show(contact);
 		view.switchToSaveExistingContactButton();
 		view.setSubmitButtonEnabled(true);
-		useCase.editContact(contact.getPersonalDetails().getId());
 		updateEntries(contact.getAddresses());
+		Application.pageTransitions.switchToEditingNewContactPage(contact.getPersonalDetails().getId());
+		view.getAddressListView().setAddAddressButtonEnabled(true);
 	}
 
 	public void editContact(Long id) {
@@ -107,7 +107,7 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 				addressId);
 		if (widget.getMode() == AddressEntryWidget.Mode.view)
 			widget.setMode(AddressEntryWidget.Mode.edit);
-		else if (widget.getMode() == AddressEntryWidget.Mode.edit){
+		else if (widget.getMode() == AddressEntryWidget.Mode.edit) {
 			widget.setMode(AddressEntryWidget.Mode.view);
 			AddressDto address = new AddressDto();
 			address.setId(widget.getId());
@@ -121,14 +121,13 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 	public void onDeleteAddressButtonClicked(Long addressId) {
 		AddressEntryWidget widget = view.getAddressListView().getEntryWidget(
 				addressId);
-		if (widget.getMode() == AddressEntryWidget.Mode.view){
+		if (widget.getMode() == AddressEntryWidget.Mode.view) {
 			if (Window.confirm("Are you sure?")) {
 				service.deleteAddress(addressId);
 			}
-		} else
-			if (widget.getMode() == AddressEntryWidget.Mode.edit){
-				widget.setMode(AddressEntryWidget.Mode.view);
-			}
+		} else if (widget.getMode() == AddressEntryWidget.Mode.edit) {
+			widget.setMode(AddressEntryWidget.Mode.view);
+		}
 	}
 
 	@Override
@@ -138,11 +137,11 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 
 	@Override
 	public void onAddressUpdated(AddressDto address) {
-		view.getAddressListView().hideNoEntriesFound();
-		AddressEntryWidget widget = view.getAddressListView().getEntryWidget(
-				address.getId());
+		AddressListView alv = view.getAddressListView();
+		alv.hideNoEntriesFound();
+		AddressEntryWidget widget = alv.getEntryWidget(address.getId());
 		if (widget == null) {
-			view.getAddressListView().addEntry(address.getId(),
+			alv.addEntry(address.getId(),
 					address.getStreetAndNumber(), address.getCity());
 		} else {
 			widget.update(address.getId(), address.getStreetAndNumber(),

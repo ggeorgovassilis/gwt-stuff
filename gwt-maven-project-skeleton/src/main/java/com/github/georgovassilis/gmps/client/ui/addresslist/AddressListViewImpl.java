@@ -19,7 +19,7 @@ public class AddressListViewImpl extends Composite implements AddressListView{
 	private AddressListViewPresenter presenter;
 	private Button addAddressButton;
 	private Map<Long, AddressEntryWidgetImpl> entries = new HashMap<Long, AddressEntryWidgetImpl>();
-	private Label noEntriesLabel = new Label("This address has no addresses");
+	private Label noEntriesLabel = new Label("This contact has no addresses");
 	
 	public AddressListViewImpl(Element element) {
 		panel = HTMLPanel.wrap(element);
@@ -79,6 +79,11 @@ public class AddressListViewImpl extends Composite implements AddressListView{
 	@Override
 	public void hideNoEntriesFound() {
 		panel.remove(noEntriesLabel);
+	}
+
+	@Override
+	public void setAddAddressButtonEnabled(boolean value) {
+		addAddressButton.setEnabled(value);
 	}
 
 }

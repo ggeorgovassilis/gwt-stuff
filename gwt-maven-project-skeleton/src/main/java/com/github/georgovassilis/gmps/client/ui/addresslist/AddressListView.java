@@ -10,4 +10,5 @@ public interface AddressListView extends BaseView{
 	void showNoEntriesFound();
 	void hideNoEntriesFound();
 	AddressEntryWidget getEntryWidget(Long id);
+	void setAddAddressButtonEnabled(boolean value);
 }

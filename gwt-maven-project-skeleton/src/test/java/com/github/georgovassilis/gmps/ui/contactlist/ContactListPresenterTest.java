@@ -14,6 +14,7 @@ import com.github.georgovassilis.gmps.client.events.ContactUpdatedEvent;
 import com.github.georgovassilis.gmps.client.ui.contactslist.ContactListPresenter;
 import com.github.georgovassilis.gmps.client.ui.contactslist.ContactListView;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
+import com.github.georgovassilis.gmps.ui.BaseClientTest;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import static org.mockito.Mockito.*;

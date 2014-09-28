@@ -55,6 +55,7 @@ public class AddressBookServiceFacade {
 	}
 
 	public void retrieveContactList(){
+
 		target.listContacts(new AsyncCallback<List<PersonalDetailsDto>>() {
 			
 			@Override

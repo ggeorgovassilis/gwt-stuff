@@ -5,6 +5,7 @@ import com.github.georgovassilis.gmps.client.events.ContactListsUpdatedEvent;
 import com.github.georgovassilis.gmps.client.services.AddressBookServiceFacade;
 import com.github.georgovassilis.gmps.client.ui.BaseViewPresenter;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.shared.EventBus;
 
 public class ContactListPresenter extends BaseViewPresenter<ContactListView> implements ContactListsUpdatedEvent.Handler{
@@ -19,7 +20,7 @@ public class ContactListPresenter extends BaseViewPresenter<ContactListView> imp
 	}
 	
 	public void onNewContactButtonClicked(){
-		Application.userCase.userClickedNewContactButton();
+		Application.pageTransitions.switchToEditingNewContactPage();
 	}
 	
 	public void showOrRefreshContactList(){

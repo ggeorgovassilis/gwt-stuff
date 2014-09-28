@@ -1,12 +1,14 @@
-package com.github.georgovassilis.gmps.ui.contactlist;
+package com.github.georgovassilis.gmps.ui;
 
 import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 
+import com.github.georgovassilis.gmps.client.Application;
 import com.github.georgovassilis.gmps.client.services.AddressBookServiceFacade;
 import com.github.georgovassilis.gmps.client.ui.contactslist.ContactListPresenter;
 import com.github.georgovassilis.gmps.client.ui.contactslist.ContactListView;
+import com.github.georgovassilis.gmps.client.usecase.PageTransitions;
 import com.github.georgovassilis.gmps.common.api.AddressBookServiceAsync;
 import com.github.georgovassilis.gmps.common.domain.AddressDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
@@ -16,18 +18,21 @@ import com.google.gwt.event.shared.testing.CountingEventBus;
 
 public class BaseClientTest {
 
-	EventBus bus;
-	AddressBookServiceFacade serviceFacade;
-	AddressBookServiceAsync service;
-	ContactDto contact1;
-	ContactDto contact2;
-	ContactDto contact3;
+	protected EventBus bus;
+	protected AddressBookServiceFacade serviceFacade;
+	protected AddressBookServiceAsync service;
+	protected ContactDto contact1;
+	protected ContactDto contact2;
+	protected ContactDto contact3;
+	protected PageTransitions pageTransitions;
 	
 	@Before
 	public void setupBaseTest(){
 		bus = new CountingEventBus();
 		service = mock(AddressBookServiceAsync.class);
 		serviceFacade = new AddressBookServiceFacade(bus, service);
+		pageTransitions = mock(PageTransitions.class);
+		Application.pageTransitions = pageTransitions;
 		
 		contact1 = new ContactDto();
 		PersonalDetailsDto details = new PersonalDetailsDto();

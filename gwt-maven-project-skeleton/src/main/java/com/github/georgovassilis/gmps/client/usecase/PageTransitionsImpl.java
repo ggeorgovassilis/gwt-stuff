@@ -9,32 +9,33 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.History;
 
-public class UseCase implements ValueChangeHandler<String>{
+public class PageTransitionsImpl implements ValueChangeHandler<String>, PageTransitions{
 
 	private EventBus bus;
 	private ContactListPresenter contactListPresenter;
 	private EditContactPresenter editContactPresenter;
 	
-	public UseCase(EventBus eventBus, ContactListPresenter contactListPresenter, EditContactPresenter editContactPresenter){
+	public PageTransitionsImpl(EventBus eventBus, ContactListPresenter contactListPresenter, EditContactPresenter editContactPresenter){
 		this.bus = eventBus;
 		this.contactListPresenter = contactListPresenter;
 		this.editContactPresenter = editContactPresenter;
 		History.addValueChangeHandler(this);
 	}
 	
+	@Override
 	public void userJustStartedApplication(){
 		bus.fireEvent(new AppStartedEvent());
 		History.fireCurrentHistoryState();
 	}
 	
-	public void userClickedNewContactButton(){
+	@Override
+	public void switchToEditingNewContactPage(){
 		History.newItem("/contacts/new");
 	}
 
-	public void userClickedSaveNewContactButton(){
-	}
 	
-	public void editContact(Long contactId){
+	@Override
+	public void switchToEditingNewContactPage(Long contactId){
 		History.newItem("/contacts/"+contactId);
 	}
 

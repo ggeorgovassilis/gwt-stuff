@@ -5,24 +5,30 @@ import java.util.List;
 import com.github.georgovassilis.gmps.common.domain.AddressDto;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
+import com.google.gwt.http.client.Request;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Async version of the {@link AddressBookService} interface
+ * @author George Georgovassilis
+ *
+ */
 public interface AddressBookServiceAsync {
 	
-	void deleteAddress(Long addressId, AsyncCallback<ContactDto> callback);
+	Request deleteAddress(Long addressId, AsyncCallback<ContactDto> callback);
 
-	void deleteContact(Long id, AsyncCallback<Void> callback);
+	Request deleteContact(Long id, AsyncCallback<Void> callback);
 
-	void getContact(Long id, AsyncCallback<ContactDto> callback);
+	Request getContact(Long id, AsyncCallback<ContactDto> callback);
 
-	Void listContacts(AsyncCallback<List<PersonalDetailsDto>> callback);
+	Request listContacts(AsyncCallback<List<PersonalDetailsDto>> callback);
 
-	void newAddressForContact(Long contactId, AddressDto address, AsyncCallback<AddressDto> callback);
+	Request newAddressForContact(Long contactId, AddressDto address, AsyncCallback<AddressDto> callback);
 
-	void newContact(PersonalDetailsDto contact, AsyncCallback<ContactDto> callback);
+	Request newContact(PersonalDetailsDto contact, AsyncCallback<ContactDto> callback);
 
-	void update(AddressDto address, AsyncCallback<AddressDto> callback);
+	Request update(AddressDto address, AsyncCallback<AddressDto> callback);
 
-	void updateContactDetails(PersonalDetailsDto contactDetails,
+	Request updateContactDetails(PersonalDetailsDto contactDetails,
 			AsyncCallback<ContactDto> callback);
 }
