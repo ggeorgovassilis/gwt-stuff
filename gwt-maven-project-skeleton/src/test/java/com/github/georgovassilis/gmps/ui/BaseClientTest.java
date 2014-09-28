@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import org.junit.Before;
 
 import com.github.georgovassilis.gmps.client.Application;
+import com.github.georgovassilis.gmps.client.events.Bus;
 import com.github.georgovassilis.gmps.client.services.AddressBookServiceFacade;
 import com.github.georgovassilis.gmps.client.ui.contactslist.ContactListPresenter;
 import com.github.georgovassilis.gmps.client.ui.contactslist.ContactListView;
@@ -18,7 +19,7 @@ import com.google.gwt.event.shared.testing.CountingEventBus;
 
 public class BaseClientTest {
 
-	protected EventBus bus;
+	protected Bus bus;
 	protected AddressBookServiceFacade serviceFacade;
 	protected AddressBookServiceAsync service;
 	protected ContactDto contact1;
@@ -28,7 +29,7 @@ public class BaseClientTest {
 	
 	@Before
 	public void setupBaseTest(){
-		bus = new CountingEventBus();
+		bus = new MockBus();
 		service = mock(AddressBookServiceAsync.class);
 		serviceFacade = new AddressBookServiceFacade(bus, service);
 		pageTransitions = mock(PageTransitions.class);

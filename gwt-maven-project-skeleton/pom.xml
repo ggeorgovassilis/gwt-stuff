@@ -21,8 +21,18 @@
 
 	<repositories>
 		<repository>
-			<id>gwt-sl-mvn-repo</id>
+			<id>flatbus</id>
+			<url>https://raw.githubusercontent.com/ggeorgovassilis/flatbus/gh-pages/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>gwt-sl</id>
 			<url>https://raw.github.com/ggeorgovassilis/gwt-sl/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 
@@ -32,6 +42,11 @@
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>2.2.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bazarooma.flatbus</groupId>
+			<artifactId>flatbus-lib</artifactId>
+			<version>1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -52,11 +67,6 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.12</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring.data.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>

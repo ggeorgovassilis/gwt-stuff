@@ -5,6 +5,7 @@ import com.github.georgovassilis.gmps.client.ui.editcontact.EditContactPresenter
 import com.github.georgovassilis.gmps.client.ui.main.MainViewImpl;
 import com.github.georgovassilis.gmps.client.usecase.PageTransitions;
 import com.github.georgovassilis.gmps.client.usecase.PageTransitionsImpl;
+import com.github.georgovassilis.gmps.client.events.Bus;
 import com.github.georgovassilis.gmps.client.services.AddressBookServiceFacade;
 import com.github.georgovassilis.gmps.common.api.AddressBookServiceAsync;
 import com.google.gwt.core.client.EntryPoint;
@@ -18,7 +19,7 @@ public class Application implements EntryPoint{
 
 	@Override
 	public void onModuleLoad() {
-		EventBus bus = GWT.create(SimpleEventBus.class);
+		Bus bus = GWT.create(Bus.class);
 		
 		AddressBookServiceFacade addressBookServiceFacade = new AddressBookServiceFacade(bus, (AddressBookServiceAsync)GWT.create(com.github.georgovassilis.gmps.common.api.AddressBookService.class));
 		MainViewImpl mainView = new MainViewImpl();

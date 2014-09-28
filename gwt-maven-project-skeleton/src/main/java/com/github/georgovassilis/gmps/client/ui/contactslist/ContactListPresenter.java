@@ -1,22 +1,23 @@
 package com.github.georgovassilis.gmps.client.ui.contactslist;
 
+import java.util.List;
+
 import com.github.georgovassilis.gmps.client.Application;
-import com.github.georgovassilis.gmps.client.events.ContactListsUpdatedEvent;
+import com.github.georgovassilis.gmps.client.events.Bus;
+import com.github.georgovassilis.gmps.client.events.ContactListUpdatedListener;
 import com.github.georgovassilis.gmps.client.services.AddressBookServiceFacade;
 import com.github.georgovassilis.gmps.client.ui.BaseViewPresenter;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
-import com.google.gwt.core.shared.GWT;
-import com.google.gwt.event.shared.EventBus;
 
-public class ContactListPresenter extends BaseViewPresenter<ContactListView> implements ContactListsUpdatedEvent.Handler{
+public class ContactListPresenter extends BaseViewPresenter<ContactListView> implements ContactListUpdatedListener{
 
 	private AddressBookServiceFacade addressBookServiceFacade;
 	
-	public ContactListPresenter(EventBus bus, ContactListView view, AddressBookServiceFacade addressBookServiceFacade) {
+	public ContactListPresenter(Bus bus, ContactListView view, AddressBookServiceFacade addressBookServiceFacade) {
 		super(bus, view);
 		this.addressBookServiceFacade = addressBookServiceFacade;
 		view.setPresenter(this);
-		bus.addHandler(ContactListsUpdatedEvent.TYPE, this);
+		bus.register(this);
 	}
 	
 	public void onNewContactButtonClicked(){
@@ -31,12 +32,12 @@ public class ContactListPresenter extends BaseViewPresenter<ContactListView> imp
 	}
 
 	@Override
-	public void onContactListsUpdated(ContactListsUpdatedEvent event) {
+	public void onContactListsUpdated(List<PersonalDetailsDto> contacts) {
 		view.clearContacts();
-		for (PersonalDetailsDto c:event.contacts){
+		for (PersonalDetailsDto c:contacts){
 			view.addContactEntry(c.getId(), c.getName(), c.getPhoneNumber());
 		}
-		if (event.contacts.isEmpty())
+		if (contacts.isEmpty())
 			view.showNoContacts();
 	}
 

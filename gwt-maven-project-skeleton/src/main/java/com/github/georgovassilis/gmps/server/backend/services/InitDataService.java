@@ -1,4 +1,4 @@
-package com.github.georgovassilis.gmps.client.services;
+package com.github.georgovassilis.gmps.server.backend.services;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

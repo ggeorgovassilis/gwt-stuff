@@ -9,8 +9,6 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import com.github.georgovassilis.gmps.client.events.ContactListsUpdatedEvent;
-import com.github.georgovassilis.gmps.client.events.ContactUpdatedEvent;
 import com.github.georgovassilis.gmps.client.ui.contactslist.ContactListPresenter;
 import com.github.georgovassilis.gmps.client.ui.contactslist.ContactListView;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
@@ -37,12 +35,9 @@ public class ContactListPresenterTest extends BaseClientTest {
 	@Test
 	public void testOnContactListsUpdated_with_entries() {
 
-		ContactListsUpdatedEvent event = new ContactListsUpdatedEvent(
-				Arrays.asList(contact1.getPersonalDetails(),
-						contact2.getPersonalDetails(),
-						contact3.getPersonalDetails()));
-
-		presenter.onContactListsUpdated(event);
+		presenter.onContactListsUpdated(Arrays.asList(
+				contact1.getPersonalDetails(), contact2.getPersonalDetails(),
+				contact3.getPersonalDetails()));
 		verify(view).addContactEntry(contact1.getPersonalDetails().getId(),
 				contact1.getPersonalDetails().getName(),
 				contact1.getPersonalDetails().getPhoneNumber());
@@ -62,10 +57,7 @@ public class ContactListPresenterTest extends BaseClientTest {
 	@Test
 	public void testOnContactListsUpdated_without_entries() {
 
-		ContactListsUpdatedEvent event = new ContactListsUpdatedEvent(
-				new ArrayList<PersonalDetailsDto>());
-
-		presenter.onContactListsUpdated(event);
+		presenter.onContactListsUpdated(new ArrayList<PersonalDetailsDto>());
 		verify(view, times(0)).addContactEntry(any(Long.class),
 				any(String.class), any(String.class));
 		verify(view).showNoContacts();
@@ -83,9 +75,10 @@ public class ContactListPresenterTest extends BaseClientTest {
 				new Answer<Void>() {
 
 					@Override
-					public Void answer(
-							InvocationOnMock invocation) throws Throwable {
-						AsyncCallback callback = (AsyncCallback)invocation.getArguments()[0];
+					public Void answer(InvocationOnMock invocation)
+							throws Throwable {
+						AsyncCallback callback = (AsyncCallback) invocation
+								.getArguments()[0];
 						List list = Arrays.asList(
 								contact1.getPersonalDetails(),
 								contact2.getPersonalDetails(),
@@ -94,12 +87,18 @@ public class ContactListPresenterTest extends BaseClientTest {
 						return null;
 					}
 				});
-		
+
 		presenter.showOrRefreshContactList();
 
 		verify(service).listContacts(any(AsyncCallback.class));
-		verify(view).addContactEntry(contact1.getPersonalDetails().getId(), contact1.getPersonalDetails().getName(), contact1.getPersonalDetails().getPhoneNumber());
-		verify(view).addContactEntry(contact2.getPersonalDetails().getId(), contact2.getPersonalDetails().getName(), contact2.getPersonalDetails().getPhoneNumber());
-		verify(view).addContactEntry(contact3.getPersonalDetails().getId(), contact3.getPersonalDetails().getName(), contact3.getPersonalDetails().getPhoneNumber());
+		verify(view).addContactEntry(contact1.getPersonalDetails().getId(),
+				contact1.getPersonalDetails().getName(),
+				contact1.getPersonalDetails().getPhoneNumber());
+		verify(view).addContactEntry(contact2.getPersonalDetails().getId(),
+				contact2.getPersonalDetails().getName(),
+				contact2.getPersonalDetails().getPhoneNumber());
+		verify(view).addContactEntry(contact3.getPersonalDetails().getId(),
+				contact3.getPersonalDetails().getName(),
+				contact3.getPersonalDetails().getPhoneNumber());
 	}
 }

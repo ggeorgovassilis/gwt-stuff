@@ -2,24 +2,21 @@ package com.github.georgovassilis.gmps.client.services;
 
 import java.util.List;
 
-import com.github.georgovassilis.gmps.client.events.AddressUpdatedEvent;
-import com.github.georgovassilis.gmps.client.events.ContactListsUpdatedEvent;
-import com.github.georgovassilis.gmps.client.events.ContactUpdatedEvent;
+import com.github.georgovassilis.gmps.client.events.Bus;
 import com.github.georgovassilis.gmps.common.api.AddressBookServiceAsync;
 import com.github.georgovassilis.gmps.common.domain.AddressDto;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class AddressBookServiceFacade {
 
 	private AddressBookServiceAsync target;
-	private EventBus bus;
+	private Bus bus;
 	
-	public AddressBookServiceFacade(EventBus bus, AddressBookServiceAsync target){
+	public AddressBookServiceFacade(Bus bus, AddressBookServiceAsync target){
 		this.bus = bus;
 		this.target = target;
 	}
@@ -34,7 +31,7 @@ public class AddressBookServiceFacade {
 
 			@Override
 			public void onSuccess(ContactDto result) {
-				bus.fireEvent(new ContactUpdatedEvent(result));
+				bus.onContactUpdated(result);
 			}
 		});
 	}
@@ -49,7 +46,7 @@ public class AddressBookServiceFacade {
 
 			@Override
 			public void onSuccess(ContactDto result) {
-				bus.fireEvent(new ContactUpdatedEvent(result));
+				bus.onContactUpdated(result);
 			}
 		});
 	}
@@ -60,7 +57,7 @@ public class AddressBookServiceFacade {
 			
 			@Override
 			public void onSuccess(List<PersonalDetailsDto> result) {
-				bus.fireEvent(new ContactListsUpdatedEvent(result));
+				bus.onContactListsUpdated(result);
 			}
 			
 			@Override
@@ -81,7 +78,7 @@ public class AddressBookServiceFacade {
 
 			@Override
 			public void onSuccess(ContactDto result) {
-				bus.fireEvent(new ContactUpdatedEvent(result));
+				bus.onContactUpdated(result);
 			}
 		});
 	}
@@ -96,7 +93,7 @@ public class AddressBookServiceFacade {
 
 			@Override
 			public void onSuccess(ContactDto result) {
-				bus.fireEvent(new ContactUpdatedEvent(result));
+				bus.onContactUpdated(result);
 			}
 		});
 	}
@@ -111,7 +108,7 @@ public class AddressBookServiceFacade {
 
 			@Override
 			public void onSuccess(AddressDto result) {
-				bus.fireEvent(new AddressUpdatedEvent(result));
+				bus.onAddressUpdated(result);
 			}
 		});
 	}
@@ -126,7 +123,7 @@ public class AddressBookServiceFacade {
 
 			@Override
 			public void onSuccess(AddressDto result) {
-				bus.fireEvent(new AddressUpdatedEvent(result));
+				bus.onAddressUpdated(result);
 			}
 		});
 	}

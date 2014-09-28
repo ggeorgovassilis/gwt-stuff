@@ -11,13 +11,13 @@ import com.github.georgovassilis.gmps.client.ui.addresslist.AddressListViewPrese
 import com.github.georgovassilis.gmps.common.domain.AddressDto;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
-import com.github.georgovassilis.gmps.client.events.AddressUpdatedEvent;
-import com.github.georgovassilis.gmps.client.events.ContactUpdatedEvent;
+import com.github.georgovassilis.gmps.client.events.Bus;
+import com.github.georgovassilis.gmps.client.events.ContactUpdatedListener;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 
 public class EditContactPresenter extends BaseViewPresenter<EditContactView>
-		implements ContactUpdatedEvent.Handler, AddressListViewPresenter {
+		implements ContactUpdatedListener, AddressListViewPresenter {
 
 	enum Mode {
 		editingNewContact, editingExistingContact
@@ -27,13 +27,12 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 	private Mode mode = Mode.editingNewContact;
 	private Long contactId = null;
 
-	public EditContactPresenter(EventBus bus, EditContactView view,
+	public EditContactPresenter(Bus bus, EditContactView view,
 			AddressBookServiceFacade service) {
 		super(bus, view);
 		this.service = service;
 		view.setPresenter(this);
-		bus.addHandler(ContactUpdatedEvent.TYPE, this);
-		bus.addHandler(AddressUpdatedEvent.TYPE, this);
+		bus.register(this);
 	}
 
 	public void editNewContact() {

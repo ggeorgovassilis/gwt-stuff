@@ -1,13 +1,13 @@
 package com.github.georgovassilis.gmps.client.ui;
 
-import com.google.gwt.event.shared.EventBus;
+import com.github.georgovassilis.gmps.client.events.Bus;
 
 public abstract class BaseViewPresenter<V extends BaseView> {
 
-	protected EventBus bus;
+	protected Bus bus;
 	protected V view;
 	
-	public BaseViewPresenter(EventBus bus, V view){
+	public BaseViewPresenter(Bus bus, V view){
 		this.bus = bus;
 		this.view = view;
 	}
