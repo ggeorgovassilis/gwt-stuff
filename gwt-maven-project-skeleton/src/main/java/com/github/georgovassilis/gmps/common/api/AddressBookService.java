@@ -19,5 +19,5 @@ public interface AddressBookService extends RemoteService{
 	
 	AddressDto newAddressForContact(Long contactId, AddressDto address);
 	AddressDto update(AddressDto address);
-	void deleteAddress(Long addressId);
+	ContactDto deleteAddress(Long addressId);
 }

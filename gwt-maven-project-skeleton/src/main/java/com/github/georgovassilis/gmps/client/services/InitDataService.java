@@ -4,8 +4,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
-import org.springframework.stereotype.Service;
-
 import com.github.georgovassilis.gmps.common.api.AddressBookService;
 import com.github.georgovassilis.gmps.common.domain.AddressDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;

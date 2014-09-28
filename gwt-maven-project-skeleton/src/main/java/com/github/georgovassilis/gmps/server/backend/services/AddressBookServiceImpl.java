@@ -112,10 +112,12 @@ public class AddressBookServiceImpl implements AddressBookService {
 	}
 
 	@Override
-	public void deleteAddress(Long addressId) {
+	public ContactDto deleteAddress(Long addressId) {
 		Address address = addressDao.findOne(addressId);
 		address.getContact().getAddresses().remove(address);
 		contactDao.saveAndFlush(address.getContact());
+		addressDao.delete(address);
+		return getContact(address.getContact().getId());
 	}
 
 }

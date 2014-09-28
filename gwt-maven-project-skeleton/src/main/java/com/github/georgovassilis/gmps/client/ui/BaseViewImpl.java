@@ -2,10 +2,8 @@ package com.github.georgovassilis.gmps.client.ui;
 
 import com.github.georgovassilis.gmps.client.ui.main.MainViewImpl;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SimplePanel;
 
 public abstract class BaseViewImpl implements BaseView{
 

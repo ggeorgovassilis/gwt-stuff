@@ -1,7 +1,7 @@
 package com.github.georgovassilis.gmps.client.ui.editcontact;
 
 import com.github.georgovassilis.gmps.client.ui.BaseViewImpl;
-import com.github.georgovassilis.gmps.client.ui.addresslist.AddressEntryWidget;
+import com.github.georgovassilis.gmps.client.ui.addresslist.AddressListView;
 import com.github.georgovassilis.gmps.client.ui.addresslist.AddressListViewImpl;
 import com.github.georgovassilis.gmps.client.ui.main.MainViewImpl;
 import com.google.gwt.dom.client.Element;
@@ -9,7 +9,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.TextBox;
 
 public class EditContactViewImpl extends BaseViewImpl implements EditContactView{
@@ -18,7 +17,7 @@ public class EditContactViewImpl extends BaseViewImpl implements EditContactView
 	private TextBox phone;
 	private Button saveButton;
 	private EditContactPresenter presenter;
-	private AddressListViewImpl addressListWidget;
+	private AddressListView addressListWidget;
 	
 	public EditContactViewImpl(Element e, MainViewImpl main){
 		super(e, main);
@@ -79,5 +78,10 @@ public class EditContactViewImpl extends BaseViewImpl implements EditContactView
 	@Override
 	public void switchToSaveExistingContactButton() {
 		saveButton.setText("Save");
+	}
+
+	@Override
+	public AddressListView getAddressListView() {
+		return addressListWidget;
 	}
 }

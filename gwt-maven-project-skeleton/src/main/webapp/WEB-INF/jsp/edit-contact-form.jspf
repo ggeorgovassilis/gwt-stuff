@@ -1,15 +1,16 @@
 <div id="edit-contact-form" class="page">
+<div>
 <h1>Edit contacts</h1>
-<a href="#/">Back to contact list</a>
-<div>
-<div><label for="name">Name</label><input id="name" type="text"/></div>
-<div><label for="phone">Phone</label><input id="phone" type="text"/></div>
-<div>
-<button id="save-contact-button">Save</button>
-</div>
+<table class=card>
+<tr><td class=label>Name</td><td><input id="name" type="text"/></td></tr>
+<tr><td class="label">Phone</td><td><input id="phone" type="text"/></td></tr>
+<tr><td><button id="save-contact-button">Save</button></td><td><a href="#/">Back to contact list</a></td></tr>
+</table>
+
 </div>
 <div>
 <h2>Addresses</h2>
+<button id="add-address-button">New address</button>
 <div id="address-list">
 </div>
 </div>

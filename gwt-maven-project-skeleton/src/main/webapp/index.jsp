@@ -34,6 +34,18 @@ html{
 	padding:0.5em;
 }
 
+.card{
+	border:solid gray 1px;
+	background-color:ghostwhite;
+	border-radius:2px 2px;
+	padding:0.5em;
+	margin-top:1em;
+	overflow:hidden;
+}
+
+.street{
+	font-weight:bold;
+}
 </style>
 </head>
 <body>

@@ -9,7 +9,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface AddressBookServiceAsync {
 	
-	void deleteAddress(Long addressId, AsyncCallback<Void> callback);
+	void deleteAddress(Long addressId, AsyncCallback<ContactDto> callback);
 
 	void deleteContact(Long id, AsyncCallback<Void> callback);
 

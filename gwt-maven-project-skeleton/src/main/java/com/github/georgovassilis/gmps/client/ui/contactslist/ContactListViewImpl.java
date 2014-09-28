@@ -1,16 +1,12 @@
 package com.github.georgovassilis.gmps.client.ui.contactslist;
 
-import java.util.List;
-
 import com.github.georgovassilis.gmps.client.ui.BaseViewImpl;
 import com.github.georgovassilis.gmps.client.ui.main.MainViewImpl;
-import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 

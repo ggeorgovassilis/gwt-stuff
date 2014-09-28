@@ -2,9 +2,11 @@ package com.github.georgovassilis.gmps.client.services;
 
 import java.util.List;
 
+import com.github.georgovassilis.gmps.client.events.AddressUpdatedEvent;
 import com.github.georgovassilis.gmps.client.events.ContactListsUpdatedEvent;
 import com.github.georgovassilis.gmps.client.events.ContactUpdatedEvent;
 import com.github.georgovassilis.gmps.common.api.AddressBookServiceAsync;
+import com.github.georgovassilis.gmps.common.domain.AddressDto;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.github.georgovassilis.gmps.common.domain.ContactDto;
 import com.google.gwt.core.client.GWT;
@@ -78,6 +80,51 @@ public class AddressBookService {
 			@Override
 			public void onSuccess(ContactDto result) {
 				bus.fireEvent(new ContactUpdatedEvent(result));
+			}
+		});
+	}
+	
+	public void deleteAddress(Long addressId){
+		addressBookService.deleteAddress(addressId, new AsyncCallback<ContactDto>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+
+			@Override
+			public void onSuccess(ContactDto result) {
+				bus.fireEvent(new ContactUpdatedEvent(result));
+			}
+		});
+	}
+	
+	public void addAddress(Long contactId, AddressDto address){
+		addressBookService.newAddressForContact(contactId, address, new AsyncCallback<AddressDto>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+
+			@Override
+			public void onSuccess(AddressDto result) {
+				bus.fireEvent(new AddressUpdatedEvent(result));
+			}
+		});
+	}
+
+	public void updateAddress(AddressDto address){
+		addressBookService.update(address, new AsyncCallback<AddressDto>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert(caught.getMessage());
+			}
+
+			@Override
+			public void onSuccess(AddressDto result) {
+				bus.fireEvent(new AddressUpdatedEvent(result));
 			}
 		});
 	}

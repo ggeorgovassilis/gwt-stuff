@@ -1,17 +1,11 @@
 package com.github.georgovassilis.gmps.client.ui.main;
 
 import com.github.georgovassilis.gmps.client.ui.BaseView;
-import com.github.georgovassilis.gmps.client.ui.BaseViewImpl;
 import com.github.georgovassilis.gmps.client.ui.contactslist.ContactListViewImpl;
 import com.github.georgovassilis.gmps.client.ui.editcontact.EditContactViewImpl;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.RootPanel;
 
 public class MainViewImpl implements MainView{
 

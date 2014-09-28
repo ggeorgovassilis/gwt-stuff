@@ -1,6 +1,7 @@
 package com.github.georgovassilis.gmps.client.ui.editcontact;
 
 import com.github.georgovassilis.gmps.client.ui.BaseView;
+import com.github.georgovassilis.gmps.client.ui.addresslist.AddressListView;
 
 public interface EditContactView extends BaseView{
 
@@ -12,4 +13,5 @@ public interface EditContactView extends BaseView{
 	void setPresenter(EditContactPresenter presenter);
 	void switchToSaveNewContactButton();
 	void switchToSaveExistingContactButton();
+	AddressListView getAddressListView();
 }

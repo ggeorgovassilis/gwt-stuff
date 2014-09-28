@@ -1,5 +1,5 @@
 <div id="contact-list" class="page">
 <h1>Contact list</h1>
-<div id="contacts-panel"></div>
 <button id="new-contact-button">New contact</button>
+<div id="contacts-panel"></div>
 </div>

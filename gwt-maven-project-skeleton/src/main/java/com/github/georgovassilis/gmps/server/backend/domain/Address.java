@@ -2,7 +2,6 @@ package com.github.georgovassilis.gmps.server.backend.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +26,7 @@ public class Address implements Serializable {
 	@Column
 	private String city;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "CONTACT_ID")
 	private Contact contact;
 

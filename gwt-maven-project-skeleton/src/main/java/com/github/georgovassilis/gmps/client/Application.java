@@ -8,13 +8,8 @@ import com.github.georgovassilis.gmps.client.usecase.UseCase;
 import com.github.georgovassilis.gmps.client.services.AddressBookService;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
 
 public class Application implements EntryPoint{
 	
