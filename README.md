@@ -1,1 +1,8 @@
-Right now, this is just a repository to serve the gwt-modules.dtd to IDEs
+GWT Sandbox
+=================
+
+## schemata
+Containts gwt-modules.dtd for IDEs
+
+## gwt-maven-project-skeleton
+A sksleton project with GWT, Maven and Spring
