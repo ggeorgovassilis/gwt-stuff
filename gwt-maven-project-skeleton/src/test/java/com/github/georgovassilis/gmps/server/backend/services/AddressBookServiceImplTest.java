@@ -1,4 +1,4 @@
-package com.github.georgovassilis.gmps;
+package com.github.georgovassilis.gmps.server.backend.services;
 
 import javax.annotation.Resource;
 

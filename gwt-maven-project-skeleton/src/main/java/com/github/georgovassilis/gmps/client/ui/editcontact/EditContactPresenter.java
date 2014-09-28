@@ -2,7 +2,7 @@ package com.github.georgovassilis.gmps.client.ui.editcontact;
 
 import java.util.List;
 
-import com.github.georgovassilis.gmps.client.services.AddressBookService;
+import com.github.georgovassilis.gmps.client.services.AddressBookServiceFacade;
 import com.github.georgovassilis.gmps.client.ui.BaseViewPresenter;
 import com.github.georgovassilis.gmps.client.ui.addresslist.AddressEntryWidget;
 import com.github.georgovassilis.gmps.client.ui.addresslist.AddressListView;
@@ -23,13 +23,13 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 		editingNewContact, editingExistingContact
 	};
 
-	private AddressBookService service;
+	private AddressBookServiceFacade service;
 	private Mode mode = Mode.editingNewContact;
 	private Long contactId = null;
 	private UseCase useCase;
 
 	public EditContactPresenter(EventBus bus, EditContactView view,
-			AddressBookService service, UseCase useCase) {
+			AddressBookServiceFacade service, UseCase useCase) {
 		super(bus, view);
 		this.service = service;
 		view.setPresenter(this);
@@ -75,7 +75,7 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 	}
 
 	@Override
-	public void contactUpdated(ContactDto contact) {
+	public void onContactUpdated(ContactDto contact) {
 		mode = Mode.editingExistingContact;
 		view.setAsMainView();
 		show(contact);
@@ -137,7 +137,7 @@ public class EditContactPresenter extends BaseViewPresenter<EditContactView>
 	}
 
 	@Override
-	public void addressUpdated(AddressDto address) {
+	public void onAddressUpdated(AddressDto address) {
 		view.getAddressListView().hideNoEntriesFound();
 		AddressEntryWidget widget = view.getAddressListView().getEntryWidget(
 				address.getId());

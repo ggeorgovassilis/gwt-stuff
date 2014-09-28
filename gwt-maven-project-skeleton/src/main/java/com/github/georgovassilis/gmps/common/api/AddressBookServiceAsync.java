@@ -15,7 +15,7 @@ public interface AddressBookServiceAsync {
 
 	void getContact(Long id, AsyncCallback<ContactDto> callback);
 
-	void listContacts(AsyncCallback<List<PersonalDetailsDto>> callback);
+	Void listContacts(AsyncCallback<List<PersonalDetailsDto>> callback);
 
 	void newAddressForContact(Long contactId, AddressDto address, AsyncCallback<AddressDto> callback);
 

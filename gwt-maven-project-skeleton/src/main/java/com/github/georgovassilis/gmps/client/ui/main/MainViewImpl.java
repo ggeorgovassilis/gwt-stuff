@@ -12,7 +12,6 @@ public class MainViewImpl implements MainView{
 	private ContactListViewImpl contactsListView;
 
 	private EditContactViewImpl editContactView;
-	private MainViewPresenter presenter;
 	
 	public MainViewImpl(){
 		contactsListView = new ContactListViewImpl(DOM.getElementById("contact-list"), this);
@@ -27,10 +26,6 @@ public class MainViewImpl implements MainView{
 		return editContactView;
 	}
 
-	public void setPresenter(MainViewPresenter presenter){
-		this.presenter = presenter;
-	}
-	
 	public void showView(BaseView view){
 		Element e = DOM.getElementById("main");
 		e.setClassName(view.getBasePanel().asWidget().getElement().getId()+"-visible");

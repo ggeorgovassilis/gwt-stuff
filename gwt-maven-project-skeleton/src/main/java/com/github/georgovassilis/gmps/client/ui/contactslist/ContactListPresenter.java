@@ -2,18 +2,18 @@ package com.github.georgovassilis.gmps.client.ui.contactslist;
 
 import com.github.georgovassilis.gmps.client.Application;
 import com.github.georgovassilis.gmps.client.events.ContactListsUpdatedEvent;
-import com.github.georgovassilis.gmps.client.services.AddressBookService;
+import com.github.georgovassilis.gmps.client.services.AddressBookServiceFacade;
 import com.github.georgovassilis.gmps.client.ui.BaseViewPresenter;
 import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.google.gwt.event.shared.EventBus;
 
 public class ContactListPresenter extends BaseViewPresenter<ContactListView> implements ContactListsUpdatedEvent.Handler{
 
-	private AddressBookService addressBookService;
+	private AddressBookServiceFacade addressBookServiceFacade;
 	
-	public ContactListPresenter(EventBus bus, ContactListView view, AddressBookService addressBookService) {
+	public ContactListPresenter(EventBus bus, ContactListView view, AddressBookServiceFacade addressBookServiceFacade) {
 		super(bus, view);
-		this.addressBookService = addressBookService;
+		this.addressBookServiceFacade = addressBookServiceFacade;
 		view.setPresenter(this);
 		bus.addHandler(ContactListsUpdatedEvent.TYPE, this);
 	}
@@ -26,7 +26,7 @@ public class ContactListPresenter extends BaseViewPresenter<ContactListView> imp
 		view.setAsMainView();
 		view.clearContacts();
 		view.showLoading();
-		addressBookService.retrieveContactList();
+		addressBookServiceFacade.retrieveContactList();
 	}
 
 	@Override

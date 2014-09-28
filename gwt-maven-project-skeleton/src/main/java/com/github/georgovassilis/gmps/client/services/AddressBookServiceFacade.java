@@ -14,17 +14,18 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class AddressBookService {
+public class AddressBookServiceFacade {
 
-	private AddressBookServiceAsync addressBookService = GWT.create(com.github.georgovassilis.gmps.common.api.AddressBookService.class);
+	private AddressBookServiceAsync target;
 	private EventBus bus;
 	
-	public AddressBookService(EventBus bus){
+	public AddressBookServiceFacade(EventBus bus, AddressBookServiceAsync target){
 		this.bus = bus;
+		this.target = target;
 	}
 	
 	public void saveNewContact(PersonalDetailsDto contact){
-		addressBookService.newContact(contact, new AsyncCallback<ContactDto>() {
+		target.newContact(contact, new AsyncCallback<ContactDto>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -39,7 +40,7 @@ public class AddressBookService {
 	}
 
 	public void saveExistingContact(PersonalDetailsDto contact){
-		addressBookService.updateContactDetails(contact, new AsyncCallback<ContactDto>() {
+		target.updateContactDetails(contact, new AsyncCallback<ContactDto>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -54,7 +55,7 @@ public class AddressBookService {
 	}
 
 	public void retrieveContactList(){
-		addressBookService.listContacts(new AsyncCallback<List<PersonalDetailsDto>>() {
+		target.listContacts(new AsyncCallback<List<PersonalDetailsDto>>() {
 			
 			@Override
 			public void onSuccess(List<PersonalDetailsDto> result) {
@@ -69,7 +70,7 @@ public class AddressBookService {
 	}
 	
 	public void retrieveContact(Long id){
-		addressBookService.getContact(id, new AsyncCallback<ContactDto>() {
+		target.getContact(id, new AsyncCallback<ContactDto>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -85,7 +86,7 @@ public class AddressBookService {
 	}
 	
 	public void deleteAddress(Long addressId){
-		addressBookService.deleteAddress(addressId, new AsyncCallback<ContactDto>() {
+		target.deleteAddress(addressId, new AsyncCallback<ContactDto>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -100,7 +101,7 @@ public class AddressBookService {
 	}
 	
 	public void addAddress(Long contactId, AddressDto address){
-		addressBookService.newAddressForContact(contactId, address, new AsyncCallback<AddressDto>() {
+		target.newAddressForContact(contactId, address, new AsyncCallback<AddressDto>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -115,7 +116,7 @@ public class AddressBookService {
 	}
 
 	public void updateAddress(AddressDto address){
-		addressBookService.update(address, new AsyncCallback<AddressDto>() {
+		target.update(address, new AsyncCallback<AddressDto>() {
 
 			@Override
 			public void onFailure(Throwable caught) {

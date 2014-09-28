@@ -8,7 +8,7 @@ public class AddressUpdatedEvent extends GwtEvent<AddressUpdatedEvent.Handler>{
 
 	public interface Handler extends EventHandler{
 		
-		void addressUpdated(AddressDto address);
+		void onAddressUpdated(AddressDto address);
 
 	}
 
@@ -27,7 +27,7 @@ public class AddressUpdatedEvent extends GwtEvent<AddressUpdatedEvent.Handler>{
 
 	@Override
 	protected void dispatch(AddressUpdatedEvent.Handler handler) {
-		handler.addressUpdated(address);
+		handler.onAddressUpdated(address);
 	}
 
 }
