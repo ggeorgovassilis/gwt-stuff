@@ -79,19 +79,21 @@ Note that the JPA model is used internally by the backend. As in every proper en
 instead we're using DTOs in the ```common.domain``` package. This involves some duplication, but gives the application more control over what and when to expose.
 For instance, when viewing the initial list of contacts, you wouldn't want to get a full list with every contact detail and every address. That particular service call returns a slim version of a contact called ```PersonalDetailsDTO``` which doesn't include addresses.
 
-The DTO is similar to the domain model, but with a twist:
+The DTO is similar to the domain model, but with a twist: 
 
 ```java
-class ContactDTO{
+
+class ContactDTO {
 	PersonalDetailsDTO details;
 	List<AddressDTO> addresses;
 }
+
 ```
 
 A little counter-intuitively, the contact's ID is hidden in ```ContactDTO.details.ID```, but that avoids duplication of the ID into ```ContactDTO``` and allows us to reuse the ```PersonalDetailsDTO`` wherever we need to operate only on the contact and not its addresses.
 
 
-The ```web.xml``` defines 
+```web.xml``` defines just the default servlet for serving resources and an ```api``` spring servlet for handling RPC.
 The backend code resides in the ```server.* ``` sub-package consisting of Spring data DAOs and an ```AddressBookService``` which is exposed as an
 RPC service to GWT via the [GWT-SL](https://github.com/ggeorgovassilis/gwt-sl). The web-agnostic part of the application is defined in ```application-context.xml``` and the web specific part in ```api-servlet.xml```.
 
