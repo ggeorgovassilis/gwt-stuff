@@ -81,11 +81,12 @@ For instance, when viewing the initial list of contacts, you wouldn't want to ge
 
 The DTO is similar to the domain model, but with a twist:
 
-```java 
+```java
 class ContactDTO{
 	PersonalDetailsDTO details;
 	List<AddressDTO> addresses;
-}```
+}
+```
 
 A little counter-intuitively, the contact's ID is hidden in ```ContactDTO.details.ID```, but that avoids duplication of the ID into ```ContactDTO``` and allows us to reuse the ```PersonalDetailsDTO`` wherever we need to operate only on the contact and not its addresses.
 
