@@ -33,7 +33,6 @@ Features:
 To do:
 
 * Integration tests with embedded servlet container
-* Automated frontend tests
 * Expand on the documentation
 
 # Methodology and tools

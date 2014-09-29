@@ -1,0 +1,7 @@
+<module>
+    <inherits name='com.google.gwt.user.User' />
+    <inherits name='com.bazarooma.flatbus'/>
+    <inherits name='com.github.georgovassilis.gmps.Client'/>
+    <entry-point class="com.github.georgovassilis.gmps.ui.Tests"/>
+    <source path='ui'/>
+</module>

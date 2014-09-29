@@ -19,7 +19,7 @@ import com.github.georgovassilis.gmps.common.domain.PersonalDetailsDto;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.testing.CountingEventBus;
 
-public class BaseClientTest {
+public abstract class BaseClientTest {
 
 	protected Bus bus;
 	protected AddressBookServiceFacade serviceFacade;
