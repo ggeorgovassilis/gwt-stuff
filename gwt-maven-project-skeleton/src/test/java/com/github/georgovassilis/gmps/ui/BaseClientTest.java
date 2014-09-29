@@ -4,6 +4,8 @@ import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 
+import com.bazarooma.flatbus.server.ServerEventBus;
+import com.bazarooma.flatbus.server.ServerEventBusFactory;
 import com.github.georgovassilis.gmps.client.Application;
 import com.github.georgovassilis.gmps.client.events.Bus;
 import com.github.georgovassilis.gmps.client.services.AddressBookServiceFacade;
@@ -29,7 +31,7 @@ public class BaseClientTest {
 	
 	@Before
 	public void setupBaseTest(){
-		bus = new MockBus();
+		bus = (new ServerEventBusFactory()).createAndProxy(Bus.class);
 		service = mock(AddressBookServiceAsync.class);
 		serviceFacade = new AddressBookServiceFacade(bus, service);
 		pageTransitions = mock(PageTransitions.class);
